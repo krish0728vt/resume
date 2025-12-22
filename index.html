@@ -1,351 +1,604 @@
-# Krish Ankur Shah
-
-<p align="center">
-  <a href="#about-me">About</a> • 
-  <a href="#work-experience">Experience</a> • 
-  <a href="#education">Education</a> • 
-  <a href="#projects">Projects</a> • 
-  <a href="#skills">Skills</a> • 
-  <a href="#certifications--online-courses">Certifications</a> • 
-  <a href="#contact">Contact</a>
-</p>
-
-## Welcome to My Personal Webpage
-
-Electrical Engineer | Robotics Enthusiast
-
-## 👋 About Me
-
-I am a Senior at Virginia Tech studying Electrical Engineering and seeking to explore options in Robotics, Artificial Intelligence, and Machine Learning. I have a keen interest in building and designing circuits.
-
-## 💼 Work Experience
-
-### Project Coordinator at Krishna Defence and Allied Industries Limited, Mumbai
-
-December 2024 – August 2025  
-
-- Led a collaboration between Krishna Defence and two engineering colleges (VJTI and VESIT) on a project to develop a smart forklift for warehouse management.
-- Coordinated cross-functional teams and provided technical guidance throughout the project lifecycle.
-- Focused on integrating UWB (Ultra-Wideband) technology and ArUco markers for precise indoor positioning and tracking within the warehouse.
-- Helped align academic innovation with real-world industrial applications in logistics automation.
-
-### Project Manager at Krishna Defence and Allied Industries Limited, Mumbai
-
-May 2024 – August 2024  
-
-- Contributed to the development of a product called snow tuggers, designed to assist soldiers in walking on snowy terrain.
-- These attachments increase the surface area of a soldier’s footwear, preventing it from sinking into snow and improving mobility.
-- Focused on optimizing the design for performance and durability using extrusion and plastics manufacturing techniques.
-- Collaborated with the product testing team to validate the design in simulated field environments.
-
-### Engineer Embedded Systems at Krishna Defence and Allied Industries Limited, Mumbai
-
-May 2023 – August 2023  
-
-- Collaborated in the development of a circuit that powers a fan with Solar/AC/8-hour battery, prioritizing green energy.
-- Assisted in manufacturing the enclosure housing the battery, circuit, and an external fuse for safety.
-- Contributed to the design of CAD files for the enclosure using SolidWorks.
-
-### Summer Trainee at RELIANCE RETAIL, Mumbai
-
-June 2022 – August 2023  
-
-- Collaborated on the development of "TRUUTH", a home medication delivery solution.
-- Conducted market research to identify the target audience.
-- Planned outreach strategies to reach potential users.
-
-### Project Head at Automation Anywhere, Virtual
-
-April 2022 – July 2023  
-
-- Developed bots to enhance clarity in scanned invoices and receipts.
-- Led troubleshooting efforts to resolve project delays and streamline performance.
-
-### Student Intern at White Gold Technologies LLP, Mumbai
-
-March 2021 – August 2021  
-
-- Assisted in assembling a patented product called Robotic Milk Collection Unit.
-- Assisted the team in making new circuits.
-
-## 🎓 Education
-
-### Virginia Polytechnic Institute and State University, Blacksburg
-
-B.S in Electrical Engineering  
-
-August 2021 – Present  
-
-- Senior studying Electrical Engineering  
-- Specialization in Controls Robotics and Autonomy  
-
-### Jai Hind College, Mumbai
-
-Associate of Science in Electronics Technology  
-
-July 2019 – March 2021  
-
-- Graduated with 90%
-
-### St. Mary's School (ISCE), Mumbai
-
-High School Diploma  
-
-June 2009 – May 2019  
-
-- Graduated with 92%  
-- Awarded Technical Drawing Application Merit  
-
-## 🧪 Projects
-
-- 🎮 Embedded Game Suite on MSP432 & BOOSTXL-EDUMKII  
-- 🔬 ECG Heart Monitor System  
-- 🎧 Home Audio System Project  
-- 🚁 Pattern Flying Drone  
-- 💡 LED Pattern Circuit  
-- ☕ Heated Cup Holder  
-- 🔥 Fire Alarm System Using IC555  
-- 🚗 Obstacle Avoidance Car Using IC  
-
----
-
-### 🎮 Embedded Game Suite on MSP432 & BOOSTXL-EDUMKII
-
-*Four mini-games on MSP432 using joystick, LCD graphics, timers, and non-blocking state machines on bare-metal C.*
-
-**Description:**
-
-A collection of four embedded games built on the MSP432 LaunchPad with the BOOSTXL-EDUMKII BoosterPack. All games share the same hardware platform – joystick, buttons, LEDs, buzzer, and 128×128 LCD – and are implemented in C using Code Composer Studio with a non-blocking main loop and timer-based events.
-
-**Dinosaur Runner Game:**  
-A hardware version of the classic browser dinosaur runner. The player uses buttons or the joystick to jump over obstacles drawn on the LCD while the score increases over time. Obstacle spawning and speed are driven by periodic timers so the gameplay stays smooth and responsive without blocking delays.
-
-**Touhou Bullet-Hell Game:**  
-A top-down bullet-hell game where a player-controlled square dodges patterned bullet waves from an enemy at the top of the screen. The joystick controls movement, while helper functions generate different bullet patterns. Player and enemy health, score, and high scores are tracked to make it feel like a compact arcade game on a microcontroller.
-
-**Cookie Clicker Idle Game:**  
-A microcontroller port of Cookie Clicker where tapping the joystick button earns cookies that can be spent on buildings like Cursor, Grandma, and Bakery to increase cookies-per-second. The LCD layout shows total cookies, CPS, buildings, and upgrades. Navigation is handled with the joystick, and upgrades such as stronger taps and random GOLD! events add depth while running in a fast, non-blocking update loop.
-
-**Reaction Time Tester:**  
-A reaction-time game that measures how quickly the player responds to an LED cue. After a random delay, an LED turns on and a hardware timer measures the time until the button is pressed. The LCD displays the reaction time for each trial and the running average, highlighting precise timing and input handling on the same platform.
-
----
-
-### 🔬 ECG Heart Monitor System
-
-*A breadboarded analog ECG front-end using an instrumentation amplifier, active filters, and a 60 Hz notch, validated on real ECG signals.*
-
-**Description:**
-
-A complete analog ECG front-end built on a breadboard, starting from electrode signals on the body and ending with a clean, amplified ECG waveform on the oscilloscope. The system uses an instrumentation amplifier followed by active filters and a precision 60 Hz notch stage to extract the heart signal while suppressing noise and mains interference.
-
-**Goals:**
-
-- Design and build a safe, working ECG acquisition chain from discrete analog blocks.  
-- Achieve high differential gain for small ECG signals while keeping common-mode noise very low.  
-- Remove 60 Hz power-line interference without damaging important ECG frequency content.  
-- Validate the final system using real ECG measurements from my own body.  
-
-**Technologies Used:**
-
-- Instrumentation Amplifier: Three-op-amp IA stage providing high differential gain with low common-mode gain.  
-- Bandpass and Low-Pass Filters: Active RC filters to isolate the ECG band and remove high-frequency noise.  
-- Active Notch Filter: Precision 60 Hz notch filter designed for deep attenuation at the mains frequency.  
-- Analog Discovery 2: Used for Bode plots, oscilloscope viewing, and spectrum analysis of the ECG signal.  
-- Disposable ECG Electrodes: Safely coupled to the circuit through large series resistors and shielded cabling.  
-
-**Features:**
-
-- High overall gain from microvolt-level electrode signals to a few volts peak-to-peak at the output.  
-- Strong rejection of common-mode noise picked up equally on all electrodes.  
-- Deep 60 Hz notch with minimal impact on nearby ECG frequency components.  
-- Clear time-domain ECG waveform showing P-QRS-T complexes and a clean spectrum up to about 100 Hz.  
-
-**Challenges:**
-
-- Choosing and matching resistor and capacitor values tightly enough for the notch filter to sit exactly at 60 Hz.  
-- Managing breadboard wiring and component tolerances across multiple stages without oscillation or instability.  
-- Reducing motion artifacts and muscle noise during real ECG measurements.  
-
-**Outcome:**
-
-The final system produced a stable, high-quality ECG waveform with strong suppression of mains interference and other noise. Building the project step-by-step (instrumentation amplifier, filters, notch, and full chain) provided hands-on experience in biomedical front-end design, analog filtering, and practical measurement techniques for low-level physiological signals.
-
----
-
-### 🎧 Home Audio System Project
-
-*Graphic equalizer + class-D amplifier + OLED spectrogram combining analog filters, PWM, and real-time audio visualization.*
-
-**Description:**
-
-An integrated audio platform combining a graphic equalizer, class-D amplifier, and OLED spectrogram display. The system processes audio input, enhances user control over sound frequencies, and visualizes real-time signal levels.
-
-**Goals:**
-
-- Develop an end-to-end audio processing system with adjustable frequency bands and high-efficiency amplification.  
-- Integrate real-time visualization via OLED for enhanced user experience.  
-- Apply analog/digital circuit design, signal processing, and microcontroller programming in one unified platform.  
-
-**Technologies Used:**
-
-- Graphic Equalizer: 2-stage RC bandpass filters for bass (60–500 Hz), mid (600 Hz–3 kHz), and treble (3–6 kHz).  
-- Class-D Amplifier: PWM modulator with triangle and comparator circuit; RLC low-pass output filter.  
-- OLED Display: Arduino-driven spectrogram displaying intensity of each frequency band in real-time.  
-- LTspice: Simulation of filters, amplifier stages, and waveform validation.  
-- Analog Discovery 2: Hardware-level frequency and distortion testing.  
-
-**Features:**
-
-- Adjustable gain control for bass, mid, and treble using potentiometers.  
-- High-efficiency class-D amplification using NMOS/PMOS switching and RLC filtering.  
-- OLED spectrogram updates regularly, reflecting live frequency intensity data.  
-- Intuitive hardware and UI design including welcome screen and dynamic bar graph rendering.  
-
-**Challenges:**
-
-- Signal noise from Arduino mitigated via averaging and thresholding techniques.  
-- Initial PWM switching overlap fixed by adding dead-time between transistor transitions.  
-- Ripple voltage at amplifier output reduced through RLC component recalibration.  
-
-**Outcome:**
-
-The system was successfully validated via oscilloscope and spectrum analysis tools, showing low harmonic distortion and accurate band separation. The project demonstrated efficient subsystem integration, engineering design maturity, and user-centric audio visualization. It provides a solid base for future extensions including Bluetooth streaming and advanced frequency analysis.
-
----
-
-### 🚁 Pattern Flying Drone
-
-*A drone programmed to fly a scripted pattern that spells out “ECE 2544” using GPS/IMU-based navigation.*
-
-**Description:**
-
-The Pattern Flying Drone is a project where a drone is programmed to fly in a specific pattern. Using flight programming, the drone was made to fly in the pattern spelling out "ECE 2544," representing the class number for which the project was undertaken.
-
-**Goals:**
-
-- Develop a drone capable of flying in a pre-defined pattern.  
-- Enhance skills in programming and controlling drones.  
-- Demonstrate the practical application of drones in creating specific flight paths.  
-
-**Technologies Used:**
-
-- Drone: Equipped with the necessary hardware for flight and control.  
-- Flight Programming Language / FPL: Used to script the drone's flight pattern.  
-- GPS and IMU Sensors: For precise navigation and stability during flight.  
-- Remote Control System: For manual overrides and adjustments.  
-
-**Features:**
-
-- Pattern Flight: Programmed to fly in the pattern spelling "ECE 2544."  
-- Autonomous Navigation: Follows the programmed flight path autonomously.  
-- Precision Control: Utilizes GPS and IMU sensors for accurate navigation.  
-- Customizable Patterns: The flight pattern can be modified for different applications.  
-
-**Challenges:**
-
-- Pattern Accuracy: Ensuring the drone accurately follows the pattern without deviations.  
-- Sensor Integration: Integrating GPS and IMU sensors for stable and precise flight.  
-- Code Optimization: Writing efficient code to control the drone's movements smoothly.  
-- Environmental Factors: Managing external factors like wind and obstacles that could affect flight.  
-
-**Outcome:**
-
-The project successfully created a drone that could fly in the specific pattern of "ECE 2544." This demonstrated the ability to program drones for precise and complex flight paths, providing valuable experience in drone technology and flight programming.
-
----
-
-### 💡 LED Pattern Circuit
-
-*A simple Arduino-based LED sequence project to explore digital outputs, timing, and pattern design.*
-
-**Description:**
-
-The LED Pattern Circuit is a project designed to control LEDs to light up in a specific pattern using an Arduino. The circuit was built on a breadboard, and the Arduino was programmed to sequence the LEDs in the desired pattern.
-
-**Goals:**
-
-- Create a visually appealing LED pattern using simple components.  
-- Enhance skills in circuit design and programming with Arduino.  
-- Understand the basics of controlling multiple outputs in a sequential manner.  
-
-**Technologies Used:**
-
-- Arduino: The main controller for the LED sequence.  
-- LEDs: For visual output, connected in a pattern on the breadboard.  
-- Breadboard and Resistors: For quick prototyping and current limiting.  
-
-**Features & Outcome:**
-
-- Custom LED patterns and sequences.  
-- Easy-to-modify breadboard layout for experimenting with different designs.  
-- Served as an introductory platform for combining basic electronics with embedded programming.
-
----
-
-### ☕ Heated Cup Holder
-
-*An Arduino-controlled heated cup that maintains beverage temperature using a temperature sensor and copper coil.*
-
-**Description (short):**
-
-A practical project designed to keep beverages warm by wrapping a copper coil around a steel cup and controlling it with an Arduino and a temperature sensor.
-
-- **Goal:** Maintain a drink at a comfortable temperature using simple, safe heating control.  
-- **Tech:** Arduino, temperature sensor, copper heating coil, steel cup, low-voltage power supply.  
-- **Outcome:** Working prototype that automatically heats when the cup cools below a threshold, giving hands-on experience with temperature regulation and basic control logic.
-
----
-
-### 🔥 Fire Alarm System Using IC555
-
-*A basic smoke/heat-triggered alarm using an IC555 timer and a thermistor, built as an early circuit design project.*
-
-- **Goal:** Build a low-cost fire alarm that triggers a buzzer when smoke/heat crosses a set threshold.  
-- **Tech:** IC555 timer, thermistor, buzzer, resistors/capacitors, simple DC power supply.  
-- **Outcome:** Reliable prototype that responds to smoke/temperature changes and introduced me to practical timer circuits and sensor interfacing.
-
----
-
-### 🚗 Obstacle Avoidance Car Using IC
-
-*A small autonomous car that senses obstacles and changes direction using IC logic and ultrasonic sensors.*
-
-- **Goal:** Develop a car that can detect obstacles, stop, and steer around them without manual control.  
-- **Tech:** IC555-based timing/control logic, ultrasonic distance sensors, L293D motor driver, DC motors and chassis.  
-- **Outcome:** Working obstacle-avoiding robot that strengthened my understanding of sensor integration, motor control, and basic autonomous behavior using simple ICs.
-
----
-
-## ⚙️ Skills
-
-- ★★★★★ Electronics  
-- ★★★★★ Robotics  
-- ★★★★★ Circuit Design  
-- ★★★★★ Technical Drawing  
-- ★★★★★ SolidWorks (CAD)  
-- ★★★★★ Sheet Metal  
-- ★★★★★ Laser Cutting  
-- ★★★★☆ C++  
-- ★★★☆☆ Artificial Intelligence  
-- ★★★☆☆ Raspberry Pi  
-- ★★★☆☆ Machine Learning  
-- ★★★☆☆ Arduino  
-
-## Certifications & Online Courses
-
-- Digital Marketing – Google Garage  
-- Machine Learning – Google Garage  
-- SolidWorks Course – LinkedIn Learning  
-
-## 📫 Contact
-
-Email: krish0728@vt.edu  
-
-Phone: +1 8049941097  
-
-LinkedIn: https://www.linkedin.com/in/krishshah  
-
-Location: Blacksburg, VA  
-
-Krish Ankur Shah © 2025
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krish Ankur Shah - Electrical Engineer</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding-top: 10px;
+      min-height: 70px;
+      border-bottom: #77aaff 3px solid;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    header a {
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 16px;
+      transition: color 0.2s ease;
+    }
+    header a:hover {
+      color: #77aaff;
+    }
+    header ul {
+      padding: 0;
+      list-style: none;
+    }
+    header li {
+      display: inline;
+      padding: 0 10px;
+    }
+    header #branding {
+      float: left;
+    }
+    header #branding h1 {
+      margin: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    header #branding img {
+      float: left;
+      margin-right: 10px;
+      border-radius: 50%;
+      height: 50px;
+    }
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: white;
+      padding: 15px;
+    }
+    #navbar {
+      float: right;
+      margin-top: 10px;
+    }
+    #navbar ul {
+      margin: 0;
+    }
+    #showcase {
+      min-height: 400px;
+      background: url('https://static.vecteezy.com/system/resources/previews/010/872/103/original/abstract-background-of-futuristic-digital-dark-blue-electronic-circuit-line-vector.jpg') no-repeat center center/cover;
+      text-align: center;
+      color: #fff;
+      margin-top: 70px;
+    }
+    #showcase h1 {
+      margin-top: 100px;
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+    #showcase p {
+      font-size: 20px;
+    }
+    #main {
+      padding: 20px 0;
+      background: transparent;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+    section[id] {
+      padding-top: 80px;
+      margin-top: -80px;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    .skills ul, .experience ul, .education ul, .projects ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .skills ul li, .experience ul li, .education ul li, .projects ul li {
+      background: #eee;
+      margin-bottom: 5px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .skills ul li:hover, .experience ul li:hover, .education ul li:hover, .projects ul li:hover {
+      background: #ccc;
+    }
+    .project-detail {
+      margin-top: 0;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 0 5px;
+      }
+      header #branding,
+      header nav {
+        float: none;
+        text-align: center;
+      }
+      .hamburger {
+        display: block;
+        float: right;
+      }
+      #navbar {
+        display: none;
+        width: 100%;
+        background: #333;
+      }
+      #navbar ul {
+        display: block;
+        text-align: center;
+        padding: 0;
+      }
+      #navbar ul li {
+        display: block;
+        padding: 10px 0;
+      }
+      #navbar.show {
+        display: block;
+      }
+      #showcase h1 {
+        font-size: 35px;
+        margin-top: 70px;
+      }
+      #showcase p {
+        font-size: 18px;
+      }
+    }
+    a:focus {
+      outline: 2px solid #77aaff;
+      outline-offset: 2px;
+    }
+  </style>
+  <script>
+    function toggleProjectDetail(id) {
+      var project = document.getElementById(id);
+      var allProjects = document.querySelectorAll('.project-detail');
+      allProjects.forEach(function(detail) {
+        if (detail !== project) {
+          detail.style.display = 'none';
+        }
+      });
+      project.style.display = (project.style.display === 'none' || project.style.display === '') ? 'block' : 'none';
+      window.scrollTo(0, document.getElementById('projects').offsetTop);
+    }
+    function toggleMenu() {
+      var nav = document.getElementById("navbar");
+      nav.classList.toggle("show");
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1>Krish Ankur Shah</h1>
+      </div>
+
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+      <nav id="navbar">
+        <ul>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#experience">Work Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="showcase">
+    <div class="container">
+      <h1>Welcome to My Personal Webpage</h1>
+      <p>Electrical Engineer | Robotics Enthusiast</p>
+    </div>
+  </section>
+
+  <section id="main" class="container">
+    <section id="about">
+      <h2>👋 About Me</h2>
+      <p>I am a Senior at Virginia Tech studying Electrical Engineering and seeking to explore options in Robotics, Artificial Intelligence, and Machine Learning. I have a keen interest in building and designing circuits.</p>
+      <p><a href="resume.pdf" target="_blank">📄 Download Resume (PDF)</a></p>
+    </section>
+
+    <section id="experience">
+      <h2>💼 Work Experience</h2>
+
+      <h3>Project Coordinator at Krishna Defence and Allied Industries Limited, Mumbai</h3>
+      <p>December 2024 – August 2025</p>
+      <ul>
+        <li>Led a collaboration between Krishna Defence and two engineering colleges (VJTI and VESIT) on a project to develop a smart forklift for warehouse management.</li>
+        <li>Coordinated cross-functional teams and provided technical guidance throughout the project lifecycle.</li>
+        <li>Focused on integrating UWB (Ultra-Wideband) technology and ArUco markers for precise indoor positioning and tracking within the warehouse.</li>
+        <li>Helped align academic innovation with real-world industrial applications in logistics automation.</li>
+      </ul>
+
+      <h3>Project Manager at Krishna Defence and Allied Industries Limited, Mumbai</h3>
+      <p>May 2024 – August 2024</p>
+      <ul>
+        <li>Contributed to the development of a product called snow tuggers, designed to assist soldiers in walking on snowy terrain.</li>
+        <li>These attachments increase the surface area of a soldier’s footwear, preventing it from sinking into snow and improving mobility.</li>
+        <li>Focused on optimizing the design for performance and durability using extrusion and plastics manufacturing techniques.</li>
+        <li>Collaborated with the product testing team to validate the design in simulated field environments.</li>
+      </ul>
+
+      <h3>Engineer Embedded Systems at Krishna Defence and Allied Industries Limited, Mumbai</h3>
+      <p>May 2023 – August 2023</p>
+      <ul>
+        <li>Collaborated in the development of a circuit that powers a fan with Solar/AC/8-hour battery, prioritizing green energy.</li>
+        <li>Assisted in manufacturing the enclosure housing the battery, circuit, and an external fuse for safety.</li>
+        <li>Contributed to the design of CAD files for the enclosure using SolidWorks.</li>
+      </ul>
+
+      <h3>Summer Trainee at RELIANCE RETAIL, Mumbai</h3>
+      <p>June 2022 – August 2023</p>
+      <ul>
+        <li>Collaborated on the development of "TRUUTH", a home medication delivery solution.</li>
+        <li>Conducted market research to identify the target audience.</li>
+        <li>Planned outreach strategies to reach potential users.</li>
+      </ul>
+
+      <h3>Project Head at Automation Anywhere, Virtual</h3>
+      <p>April 2022 – July 2023</p>
+      <ul>
+        <li>Developed bots to enhance clarity in scanned invoices and receipts.</li>
+        <li>Led troubleshooting efforts to resolve project delays and streamline performance.</li>
+      </ul>
+
+      <h3>Student Intern at White Gold Technologies LLP, Mumbai</h3>
+      <p>March 2021 – August 2021</p>
+      <ul>
+        <li>Assisted in assembling a patented product called Robotic Milk Collection Unit.</li>
+        <li>Assisted the team in making new circuits.</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>🎓 Education</h2>
+
+      <h3>Virginia Polytechnic Institute and State University, Blacksburg</h3>
+      <p>B.S in Electrical Engineering</p>
+      <p>August 2021 – Present</p>
+      <ul>
+        <li>Senior studying Electrical Engineering</li>
+        <li>Specialization in Controls Robotics and Autonomy</li>
+      </ul>
+
+      <h3>Jai Hind College, Mumbai</h3>
+      <p>Associate of Science in Electronics Technology</p>
+      <p>July 2019 – March 2021</p>
+      <ul>
+        <li>Graduated with 90%</li>
+      </ul>
+
+      <h3>St. Mary's School (ISCE), Mumbai</h3>
+      <p>High School Diploma</p>
+      <p>June 2009 – May 2019</p>
+      <ul>
+        <li>Graduated with 92%</li>
+        <li>Awarded Technical Drawing Application Merit</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>🧪 Projects</h2>
+      <ul>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project5')">🎮 Embedded Game Suite on MSP432 &amp; BOOSTXL-EDUMKII</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project9')">🔬 ECG Heart Monitor System</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project8')">🎧 Home Audio System Project</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project3')">🚁 Pattern Flying Drone</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project7')">💡 LED Pattern Circuit</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project4')">☕ Heated Cup Holder</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project1')">🔥 Fire Alarm System Using IC555</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project2')">🚗 Obstacle Avoidance Car Using IC</a></li>
+      </ul>
+    </section>
+
+    <!-- Project 5: Embedded Game Suite -->
+    <section id="project5" class="project-detail" style="margin-top: 30px;">
+      <h2>Embedded Game Suite on MSP432 &amp; BOOSTXL-EDUMKII</h2>
+      <p><em>Four mini-games on MSP432 using joystick, LCD graphics, timers, and non-blocking state machines in bare-metal C.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        A collection of four embedded games built on the MSP432 LaunchPad with the BOOSTXL-EDUMKII BoosterPack. 
+        All games share the same hardware platform – joystick, buttons, LEDs, buzzer, and a 128×128 LCD – and are 
+        implemented in C using Code Composer Studio with a non-blocking main loop and timer-based events.
+      </p>
+
+      <p><strong>Dinosaur Runner Game:</strong></p>
+      <p>
+        A hardware version of the classic browser dinosaur runner. The player uses buttons or the joystick to jump 
+        over obstacles drawn on the LCD while the score increases over time. Obstacle spawning and speed are driven by 
+        periodic timers so the gameplay stays smooth and responsive without blocking delays.
+      </p>
+
+      <p><strong>Touhou Bullet-Hell Game:</strong></p>
+      <p>
+        A top-down bullet-hell game where a player-controlled square dodges patterned bullet waves from an enemy at the 
+        top of the screen. The joystick controls movement, while helper functions generate different bullet patterns. 
+        Player and enemy health, score, and high scores are tracked to make it feel like a compact arcade game on a microcontroller.
+      </p>
+
+      <p><strong>Cookie Clicker Idle Game:</strong></p>
+      <p>
+        A microcontroller port of Cookie Clicker where tapping the joystick button earns cookies that can be spent on 
+        buildings like Cursor, Grandma, and Bakery to increase cookies-per-second. The LCD layout shows total cookies, CPS, 
+        buildings, and upgrades. Navigation is handled with the joystick, and upgrades such as stronger taps and random GOLD! 
+        events add depth while running in a fast, non-blocking update loop.
+      </p>
+
+      <p><strong>Reaction Time Tester:</strong></p>
+      <p>
+        A reaction-time game that measures how quickly the player responds to an LED cue. After a random delay, an 
+        LED turns on and a hardware timer measures the time until the button is pressed. The LCD displays the reaction 
+        time for each trial and the running average, highlighting precise timing and input handling on the same platform.
+      </p>
+    </section>
+
+    <!-- Project 9: ECG -->
+    <section id="project9" class="project-detail" style="margin-top: 30px;">
+      <h2>ECG Heart Monitor System</h2>
+      <p><em>A breadboarded analog ECG front-end using an instrumentation amplifier, active filters, and a 60 Hz notch, validated on real ECG signals.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        A complete analog ECG front-end built on a breadboard, starting from electrode signals on the body and ending with 
+        a clean, amplified ECG waveform on the oscilloscope. The system uses an instrumentation amplifier followed by 
+        active filters and a precision 60 Hz notch stage to extract the heart signal while suppressing noise and mains interference.
+      </p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Design and build a safe, working ECG acquisition chain from discrete analog blocks.</li>
+        <li>Achieve high differential gain for small ECG signals while keeping common-mode noise very low.</li>
+        <li>Remove 60 Hz power-line interference without damaging important ECG frequency content.</li>
+        <li>Validate the final system using real ECG measurements from my own body.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>Instrumentation Amplifier: Three-op-amp IA stage providing high differential gain with low common-mode gain.</li>
+        <li>Bandpass and Low-Pass Filters: Active RC filters to isolate the ECG band and remove high-frequency noise.</li>
+        <li>Active Notch Filter: Precision 60 Hz notch filter designed for deep attenuation at the mains frequency.</li>
+        <li>Analog Discovery 2: Used for Bode plots, oscilloscope viewing, and spectrum analysis of the ECG signal.</li>
+        <li>Disposable ECG Electrodes: Safely coupled to the circuit through large series resistors and shielded cabling.</li>
+      </ul>
+
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>High overall gain from microvolt-level electrode signals to a few volts peak-to-peak at the output.</li>
+        <li>Strong rejection of common-mode noise picked up equally on all electrodes.</li>
+        <li>Deep 60 Hz notch with minimal impact on nearby ECG frequency components.</li>
+        <li>Clear time-domain ECG waveform showing P-QRS-T complexes and a clean spectrum up to about 100 Hz.</li>
+      </ul>
+
+      <p><strong>Challenges:</strong></p>
+      <ul>
+        <li>Choosing and matching resistor and capacitor values tightly enough for the notch filter to sit exactly at 60 Hz.</li>
+        <li>Managing breadboard wiring and component tolerances across multiple stages without oscillation or instability.</li>
+        <li>Reducing motion artifacts and muscle noise during real ECG measurements.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>
+        The final system produced a stable, high-quality ECG waveform with strong suppression of mains interference and other noise. 
+        Building the project step-by-step (instrumentation amplifier, filters, notch, and full chain) provided hands-on experience in 
+        biomedical front-end design, analog filtering, and practical measurement techniques for low-level physiological signals.
+      </p>
+    </section>
+
+    <!-- Project 8: Home Audio System -->
+    <section id="project8" class="project-detail" style="margin-top: 30px;">
+      <h2>Home Audio System Project</h2>
+      <p><em>Graphic equalizer + class-D amplifier + OLED spectrogram combining analog filters, PWM, and real-time audio visualization.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>An integrated audio platform combining a graphic equalizer, class-D amplifier, and OLED spectrogram display. The system processes audio input, enhances user control over sound frequencies, and visualizes real-time signal levels.</p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Develop an end-to-end audio processing system with adjustable frequency bands and high-efficiency amplification.</li>
+        <li>Integrate real-time visualization via OLED for enhanced user experience.</li>
+        <li>Apply analog/digital circuit design, signal processing, and microcontroller programming in one unified platform.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>Graphic Equalizer: 2-stage RC bandpass filters for bass (60–500 Hz), mid (600 Hz–3 kHz), and treble (3–6 kHz).</li>
+        <li>Class-D Amplifier: PWM modulator with triangle and comparator circuit; RLC low-pass output filter.</li>
+        <li>OLED Display: Arduino-driven spectrogram displaying intensity of each frequency band in real-time.</li>
+        <li>LTspice: Simulation of filters, amplifier stages, and waveform validation.</li>
+        <li>Analog Discovery 2: Hardware-level frequency and distortion testing.</li>
+      </ul>
+
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Adjustable gain control for bass, mid, and treble using potentiometers.</li>
+        <li>High-efficiency class-D amplification using NMOS/PMOS switching and RLC filtering.</li>
+        <li>OLED spectrogram updates regularly, reflecting live frequency intensity data.</li>
+        <li>Intuitive hardware and UI design including welcome screen and dynamic bar graph rendering.</li>
+      </ul>
+
+      <p><strong>Challenges:</strong></p>
+      <ul>
+        <li>Signal noise from Arduino mitigated via averaging and thresholding techniques.</li>
+        <li>Initial PWM switching overlap fixed by adding dead-time between transistor transitions.</li>
+        <li>Ripple voltage at amplifier output reduced through RLC component recalibration.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>The system was successfully validated via oscilloscope and spectrum analysis tools, showing low harmonic distortion and accurate band separation. The project demonstrated efficient subsystem integration, engineering design maturity, and user-centric audio visualization. It provides a solid base for future extensions including Bluetooth streaming and advanced frequency analysis.</p>
+    </section>
+
+    <!-- Project 3: Pattern Flying Drone -->
+    <section id="project3" class="project-detail" style="margin-top: 30px;">
+      <h2>Pattern Flying Drone</h2>
+      <p><em>A drone programmed to fly a scripted pattern that spells out “ECE 2544” using GPS/IMU-based navigation.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>The Pattern Flying Drone is a project where a drone is programmed to fly in a specific pattern. Using flight programming, the drone was made to fly in the pattern spelling out "ECE 2544," representing the class number for which the project was undertaken.</p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Develop a drone capable of flying in a pre-defined pattern.</li>
+        <li>Enhance skills in programming and controlling drones.</li>
+        <li>Demonstrate the practical application of drones in creating specific flight paths.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>Drone: Equipped with the necessary hardware for flight and control.</li>
+        <li>Flight Programming Language / FPL: Used to script the drone's flight pattern.</li>
+        <li>GPS and IMU Sensors: For precise navigation and stability during flight.</li>
+        <li>Remote Control System: For manual overrides and adjustments.</li>
+      </ul>
+
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Pattern Flight: Programmed to fly in the pattern spelling "ECE 2544."</li>
+        <li>Autonomous Navigation: Follows the programmed flight path autonomously.</li>
+        <li>Precision Control: Utilizes GPS and IMU sensors for accurate navigation.</li>
+        <li>Customizable Patterns: The flight pattern can be modified for different applications.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>The project successfully created a drone that could fly in the specific pattern of "ECE 2544." This demonstrated the ability to program drones for precise and complex flight paths, providing valuable experience in drone technology and flight programming.</p>
+    </section>
+
+    <!-- Project 7: LED Pattern Circuit -->
+    <section id="project7" class="project-detail" style="margin-top: 30px;">
+      <h2>LED Pattern Circuit</h2>
+      <p><em>An Arduino-based LED sequence project to explore digital outputs, timing, and pattern design.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>The LED Pattern Circuit is a project designed to control LEDs to light up in a specific pattern using an Arduino. The circuit was built on a breadboard, and the Arduino was programmed to sequence the LEDs in the desired pattern.</p>
+
+      <p><strong>Summary:</strong></p>
+      <ul>
+        <li><strong>Goal:</strong> Create a visually appealing LED pattern using simple components and basic timing logic.</li>
+        <li><strong>Tech:</strong> Arduino, LEDs, resistors, breadboard wiring for quick prototyping.</li>
+        <li><strong>Outcome:</strong> Working LED sequences that provided hands-on practice with digital outputs and simple embedded programming.</li>
+      </ul>
+    </section>
+
+    <!-- Project 4: Heated Cup Holder -->
+    <section id="project4" class="project-detail" style="margin-top: 30px;">
+      <h2>Heated Cup Holder</h2>
+      <p><em>An Arduino-controlled heated cup that maintains beverage temperature using a temperature sensor and copper coil.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>A practical project designed to keep beverages warm by wrapping a copper coil around a steel cup and controlling it with an Arduino and a temperature sensor.</p>
+
+      <p><strong>Summary:</strong></p>
+      <ul>
+        <li><strong>Goal:</strong> Maintain a drink at a comfortable temperature using simple, safe heating control.</li>
+        <li><strong>Tech:</strong> Arduino, temperature sensor, copper heating coil, steel cup, low-voltage power supply.</li>
+        <li><strong>Outcome:</strong> Working prototype that automatically heats when the cup cools below a threshold, giving hands-on experience with temperature regulation and basic control logic.</li>
+      </ul>
+    </section>
+
+    <!-- Project 1: Fire Alarm System -->
+    <section id="project1" class="project-detail" style="margin-top: 30px;">
+      <h2>Fire Alarm System Using IC555</h2>
+      <p><em>A basic smoke/heat-triggered alarm using an IC555 timer and a thermistor, built as an early circuit design project.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>The Fire Alarm System is a simple and cost-effective circuit designed to detect smoke or heat and trigger an audible alarm using an IC555 timer-based circuit.</p>
+
+      <p><strong>Summary:</strong></p>
+      <ul>
+        <li><strong>Goal:</strong> Build a low-cost fire alarm that responds to smoke/heat crossing a set threshold.</li>
+        <li><strong>Tech:</strong> IC555 timer, thermistor, buzzer, resistors/capacitors, small DC power supply.</li>
+        <li><strong>Outcome:</strong> Reliable prototype that responds to temperature/smoke changes and introduced me to practical timer circuits and sensor interfacing.</li>
+      </ul>
+    </section>
+
+    <!-- Project 2: Obstacle Avoidance Car -->
+    <section id="project2" class="project-detail" style="margin-top: 30px;">
+      <h2>Obstacle Avoidance Car Using IC</h2>
+      <p><em>A small autonomous car that senses obstacles and changes direction using simple IC logic and ultrasonic sensors.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>The Obstacle Avoidance Car is an autonomous vehicle designed to navigate and avoid obstacles in its path using sensor input and basic IC-based control.</p>
+
+      <p><strong>Summary:</strong></p>
+      <ul>
+        <li><strong>Goal:</strong> Develop a car that can detect obstacles, stop, and steer around them without manual control.</li>
+        <li><strong>Tech:</strong> IC555-based timing/control logic, ultrasonic distance sensors, L293D motor driver, DC motors and chassis.</li>
+        <li><strong>Outcome:</strong> Working obstacle-avoiding robot that strengthened my understanding of sensor integration, motor control, and basic autonomous behavior using simple ICs.</li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h2>⚙️ Skills</h2>
+      <ul>
+        <li>★★★★★ Electronics</li>
+        <li>★★★★★ Robotics</li>
+        <li>★★★★★ Circuit Design</li>
+        <li>★★★★★ Technical Drawing</li>
+        <li>★★★★★ SolidWorks (CAD)</li>
+        <li>★★★★★ Sheet Metal</li>
+        <li>★★★★★ Laser Cutting</li>
+        <li>★★★★☆ C++</li>
+        <li>★★★☆☆ Artificial Intelligence</li>
+        <li>★★★☆☆ Raspberry Pi</li>
+        <li>★★★☆☆ Machine Learning</li>
+        <li>★★★☆☆ Arduino</li>
+      </ul>
+    </section>
+
+    <section id="certifications">
+      <h2>📜 Certifications &amp; Online Courses</h2>
+      <ul>
+        <li>Digital Marketing – Google Garage</li>
+        <li>Machine Learning – Google Garage</li>
+        <li>SolidWorks Course – LinkedIn Learning</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>📫 Contact</h2>
+      <p>📧 Email: <a href="mailto:krish0728@vt.edu">krish0728@vt.edu</a></p>
+      <p>📞 Phone: <a href="tel:+918879001177">+91 8879001177</a></p>
+      <p>🌐 LinkedIn: <a href="https://www.linkedin.com/in/krish-shah-4622771a9/" target="_blank">linkedin.com/in/krishshah</a></p>
+      <p>📍 Location: Mumbai, India</p>
+    </section>
+  </section>
+
+  <footer>
+    <p>Krish Ankur Shah &copy; 2025</p>
+  </footer>
+</body>
+</html>

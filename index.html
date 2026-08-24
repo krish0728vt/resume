@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krish Ankur Shah - Electrical Engineer</title>
+  <title>Krish Ankur Shah - Computer Engineering</title>
   <style>
     html {
       scroll-behavior: smooth;
@@ -221,19 +221,29 @@
   <section id="showcase">
     <div class="container">
       <h1>Welcome to My Personal Webpage</h1>
-      <p>Electrical Engineer | Robotics Enthusiast</p>
+      <p>Computer Engineering | Embedded Systems | Robotics</p>
     </div>
   </section>
 
   <section id="main" class="container">
     <section id="about">
       <h2>👋 About Me</h2>
-      <p>I am a Senior at Virginia Tech studying Electrical Engineering and seeking to explore options in Robotics, Artificial Intelligence, and Machine Learning. I have a keen interest in building and designing circuits.</p>
+      <p>I am a Senior at Virginia Tech studying Computer Engineering with a strong interest in embedded systems, robotics, PCB design, and hardware-software integration. I enjoy building practical engineering projects that combine circuits, microcontrollers, CAD, and software to solve real-world problems.</p>
       <p><a href="resume.pdf" target="_blank">📄 Download Resume (PDF)</a></p>
     </section>
 
     <section id="experience">
       <h2>💼 Work Experience</h2>
+
+      <h3>Engineering Intern at WaveLogix, Blacksburg</h3>
+      <p>May 2026 – August 2026</p>
+      <ul>
+        <li>Worked on embedded systems, PCB design, automation, and hardware/software integration projects for electronics inventory and manufacturing support.</li>
+        <li>Developed and tested a Smart SMD Rack system using Raspberry Pi, ESP32 controllers, BLE communication, barcode workflows, Python, and addressable LED indicators.</li>
+        <li>Designed and supported modular LED control hardware, including NeoPixel-based PCB modules, connector pinouts, power distribution, and KiCad layout planning.</li>
+        <li>Built and debugged firmware for ESP32-based rack controllers, including BLE command handling, LED control, cart-light control, and multi-rack communication.</li>
+        <li>Created technical documentation, BOM organization, testing notes, and project records to support internal engineering workflows.</li>
+      </ul>
 
       <h3>Project Coordinator at Krishna Defence and Allied Industries Limited, Mumbai</h3>
       <p>December 2024 – August 2025</p>
@@ -288,10 +298,10 @@
       <h2>🎓 Education</h2>
 
       <h3>Virginia Polytechnic Institute and State University, Blacksburg</h3>
-      <p>B.S in Electrical Engineering</p>
+      <p>B.S. in Computer Engineering</p>
       <p>August 2021 – Present</p>
       <ul>
-        <li>Senior studying Electrical Engineering</li>
+        <li>Senior studying Computer Engineering</li>
         <li>Specialization in Controls Robotics and Autonomy</li>
       </ul>
 
@@ -314,6 +324,11 @@
     <section id="projects">
       <h2>🧪 Projects</h2>
       <ul>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project14')">🌊 MDE WMI Project — Wave Measurement Instrument</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project13')">🛸 Drone Flight Controller</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project12')">📷 Smart Drawer Camera Alert PCB</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project11')">🟦 9×9 RGB 5050 LED Panel</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project10')">💠 LED Magic Cube</a></li>
         <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project5')">🎮 Embedded Game Suite on MSP432 &amp; BOOSTXL-EDUMKII</a></li>
         <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project9')">🔬 ECG Heart Monitor System</a></li>
         <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project8')">🎧 Home Audio System Project</a></li>
@@ -323,6 +338,171 @@
         <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project1')">🔥 Fire Alarm System Using IC555</a></li>
         <li><a href="javascript:void(0)" onclick="toggleProjectDetail('project2')">🚗 Obstacle Avoidance Car Using IC</a></li>
       </ul>
+    </section>
+
+    <!-- Project 14: MDE WMI Project -->
+    <section id="project14" class="project-detail" style="margin-top: 30px;">
+      <h2>MDE WMI Project — Wave Measurement Instrument</h2>
+      <p><em>Ongoing Major Design Experience project developing a self-contained wave measurement instrument using an ESP32-S3 microcontroller, onboard IMU, wireless data transfer, and a Raspberry Pi/PC processing pipeline.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        The WMI project, also referred to as WaveSense-USV, is an ongoing wave measurement system designed to collect motion data from a floating platform and transmit that data for wave analysis. The WMI itself focuses on sensing and transmitting data, while processing and visualization are handled by a Raspberry Pi and laptop-based GUI.
+      </p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Develop a compact, battery-powered instrument capable of collecting wave-motion data using an onboard IMU.</li>
+        <li>Transmit sensor data wirelessly to a Raspberry Pi for wave processing and later visualization on a PC GUI.</li>
+        <li>Design a reliable enclosure and power system for outdoor/water-adjacent testing conditions.</li>
+        <li>Support future validation against known wave data and buoy-style reference measurements.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>ATOMS3 / ESP32-S3 microcontroller with integrated IMU for motion sensing.</li>
+        <li>LiPo battery, switch, voltage regulator, and battery-voltage monitoring for portable operation.</li>
+        <li>Wireless data transfer using WiFi/Bluetooth with RF/LoRa considered as an output path.</li>
+        <li>Raspberry Pi for receiving data and supporting wave-processing workflow.</li>
+        <li>Custom PCB planning, waterproof enclosure design, and GUI integration.</li>
+      </ul>
+
+      <p><strong>Outcome / Status:</strong></p>
+      <p>
+        The project is ongoing, with system architecture, electronics blocks, data-flow planning, and enclosure requirements under development. It has strengthened my experience with embedded sensing, data acquisition, system-level design, power planning, and hardware/software integration.
+      </p>
+    </section>
+
+    <!-- Project 13: Drone Flight Controller -->
+    <section id="project13" class="project-detail" style="margin-top: 30px;">
+      <h2>Drone Flight Controller</h2>
+      <p><em>A compact ESP32-based quadcopter control board for 6×15 mm coreless motors, integrating IMU sensing, MOSFET motor drivers, battery power, and custom PCB layout.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        A custom drone flight controller project focused on building a lightweight PCB for a small coreless-motor quadcopter. The board combines a microcontroller, IMU, motor driver stages, battery input, and power routing into a compact layout suitable for a small drone frame.
+      </p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Design a compact controller board for a 6×15 mm coreless motor quadcopter.</li>
+        <li>Integrate motion sensing, motor control, and power management into one PCB.</li>
+        <li>Support stable motor control through low-side MOSFET driver stages.</li>
+        <li>Develop a board layout that fits a small drone frame while keeping routing clean and reliable.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>ESP32-S3 microcontroller platform for control and firmware development.</li>
+        <li>MPU6050 IMU for acceleration and gyroscope feedback.</li>
+        <li>MOSFET motor driver circuits for four coreless motors.</li>
+        <li>Custom PCB layout, power routing, ground planes, and motor connector planning.</li>
+        <li>3D-printed frame and compact mechanical layout planning.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>
+        The project expanded my experience with embedded control hardware, motor driver design, IMU integration, compact PCB layout, and the electrical/mechanical tradeoffs involved in drone electronics.
+      </p>
+    </section>
+
+    <!-- Project 12: Smart Drawer Camera Alert PCB -->
+    <section id="project12" class="project-detail" style="margin-top: 30px;">
+      <h2>Smart Drawer Camera Alert PCB</h2>
+      <p><em>An ESP32-S3 camera-based drawer monitoring PCB that detects drawer opening, captures an image, and sends an alert through a connected notification system.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        A low-power smart drawer monitoring system designed around an ESP32-S3 module, camera connector, magnetic switch input, battery charging, and onboard power regulation. The system detects when a drawer opens, captures an image, and sends an alert for security or monitoring use cases.
+      </p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Design a compact embedded camera PCB for drawer-open detection and remote notification.</li>
+        <li>Integrate battery charging, voltage regulation, camera interface, and sensor input on one board.</li>
+        <li>Support image capture using an OV2640 camera module and ESP32-S3 microcontroller.</li>
+        <li>Create a practical, battery-powered design suitable for enclosure integration.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>ESP32-S3-WROOM-1-N16R8 microcontroller module.</li>
+        <li>OV2640 camera interface through FPC connector.</li>
+        <li>BQ24075 LiPo charging circuit and TPS63001 3.3 V regulator.</li>
+        <li>USB-C charge input, JST battery connector, magnetic reed switch, and status/flash LEDs.</li>
+        <li>PCB schematic design, power-tree planning, antenna keepout, and compact board layout.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>
+        The project strengthened my skills in embedded PCB design, power management, camera integration, battery-powered systems, and practical hardware debugging for connected IoT-style devices.
+      </p>
+    </section>
+
+    <!-- Project 11: 9x9 RGB 5050 LED Panel -->
+    <section id="project11" class="project-detail" style="margin-top: 30px;">
+      <h2>9×9 RGB 5050 LED Panel</h2>
+      <p><em>A custom 81-LED RGB panel using non-addressable 5050 LEDs, MOSFET color-channel drivers, and an ESP32-C3 controller.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        A custom LED panel project using 81 non-addressable RGB 5050 LEDs arranged in a 9×9 matrix. Instead of individually addressable LEDs, the design focuses on shared RGB channel control through MOSFET driver stages and a microcontroller-based control system.
+      </p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Create a bright 9×9 RGB LED display panel with clean and repeatable PCB layout.</li>
+        <li>Control shared red, green, and blue channels using MOSFET-based low-side drivers.</li>
+        <li>Design power routing suitable for high LED current using a 5 V supply.</li>
+        <li>Practice LED array layout, thermal awareness, and current-handling considerations.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>81 non-addressable RGB 5050 LEDs.</li>
+        <li>ESP32-C3 SuperMini controller.</li>
+        <li>Three MOSFET driver channels for global RGB control.</li>
+        <li>5 V high-current power input, current-limiting resistor planning, and PCB power routing.</li>
+        <li>Custom PCB layout with LEDs on the front and controller/driver hardware on the back.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>
+        The project provided practical experience in LED power design, MOSFET switching, high-current PCB routing, and display-style hardware layout.
+      </p>
+    </section>
+
+    <!-- Project 10: LED Magic Cube -->
+    <section id="project10" class="project-detail" style="margin-top: 30px;">
+      <h2>LED Magic Cube</h2>
+      <p><em>A 6-sided RGB LED cube using 150 WS2812B LEDs, custom face PCBs, ESP32 control, and a 3D-printed enclosure/base system.</em></p>
+
+      <p><strong>Description:</strong></p>
+      <p>
+        A modular LED cube project made from six 50×50 mm PCB faces, each carrying a 5×5 grid of WS2812B addressable LEDs. A single ESP32 controller in the base drives all six faces through a chained data line, creating a compact RGB display object with custom electronics and mechanical enclosure design.
+      </p>
+
+      <p><strong>Goals:</strong></p>
+      <ul>
+        <li>Design a visually appealing RGB LED cube using custom PCBs and a 3D-printed base.</li>
+        <li>Build six modular LED faces that can be assembled into a cube structure.</li>
+        <li>Route power and data reliably across 150 addressable LEDs.</li>
+        <li>Create an enclosure and support system that protects the electronics while keeping the cube clean and display-ready.</li>
+      </ul>
+
+      <p><strong>Technologies Used:</strong></p>
+      <ul>
+        <li>150 WS2812B addressable RGB LEDs across six PCB faces.</li>
+        <li>ESP32 controller and 5 V barrel-jack power input.</li>
+        <li>Custom PCB design with LED/capacitor placement, serpentine data routing, and face-to-face connectors.</li>
+        <li>3D-printed base, support ring, and mechanical assembly planning.</li>
+        <li>EasyEDA Spark workflow for schematic, layout, and fabrication planning.</li>
+      </ul>
+
+      <p><strong>Outcome:</strong></p>
+      <p>
+        The LED Magic Cube brought together PCB design, addressable LED control, power distribution, firmware planning, and enclosure design into one complete hardware project.
+      </p>
     </section>
 
     <!-- Project 5: Embedded Game Suite -->
@@ -565,17 +745,19 @@
       <h2>⚙️ Skills</h2>
       <ul>
         <li>★★★★★ Electronics</li>
-        <li>★★★★★ Robotics</li>
+        <li>★★★★★ Embedded Systems</li>
         <li>★★★★★ Circuit Design</li>
-        <li>★★★★★ Technical Drawing</li>
-        <li>★★★★★ SolidWorks (CAD)</li>
-        <li>★★★★★ Sheet Metal</li>
-        <li>★★★★★ Laser Cutting</li>
-        <li>★★★★☆ C++</li>
-        <li>★★★☆☆ Artificial Intelligence</li>
-        <li>★★★☆☆ Raspberry Pi</li>
-        <li>★★★☆☆ Machine Learning</li>
-        <li>★★★☆☆ Arduino</li>
+        <li>★★★★★ PCB Design</li>
+        <li>★★★★★ SolidWorks / CAD</li>
+        <li>★★★★★ Robotics</li>
+        <li>★★★★☆ KiCad / EasyEDA</li>
+        <li>★★★★☆ ESP32 / Arduino</li>
+        <li>★★★★☆ Raspberry Pi</li>
+        <li>★★★★☆ C / C++</li>
+        <li>★★★★☆ Python</li>
+        <li>★★★★☆ MATLAB</li>
+        <li>★★★★☆ Hardware Debugging</li>
+        <li>★★★☆☆ Artificial Intelligence / Machine Learning</li>
       </ul>
     </section>
 
@@ -598,7 +780,7 @@
   </section>
 
   <footer>
-    <p>Krish Ankur Shah &copy; 2025</p>
+    <p>Krish Ankur Shah &copy; 2026</p>
   </footer>
 </body>
 </html>

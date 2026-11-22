@@ -84,8 +84,7 @@
       margin-top: 20px;
     }
     section[id] {
-      padding-top: 80px;
-      margin-top: -80px;
+      scroll-margin-top: 90px;
     }
     footer {
       background: #333;
@@ -109,13 +108,35 @@
       background: #ccc;
     }
     .project-detail {
-      margin-top: 0;
+      margin-top: 24px;
       padding: 20px;
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       display: none;
       margin-bottom: 20px;
+    }
+    #projects > ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 28px;
+    }
+    #projects > ul > li {
+      background: #eee;
+      margin-bottom: 8px;
+      padding: 12px 15px;
+      border-radius: 6px;
+    }
+    #projects > ul > li:hover {
+      background: #ddd;
+    }
+    #projects > ul > li a {
+      display: block;
+      color: #2457a6;
+      text-decoration: none;
+    }
+    #projects > ul > li a:hover {
+      text-decoration: underline;
     }
     @media (max-width: 768px) {
       .container {
@@ -159,16 +180,16 @@
   <script>
     function toggleProjectDetail(id) {
       var project = document.getElementById(id);
-      var allProjects = document.querySelectorAll('.project-detail');
-      allProjects.forEach(function(detail) {
-        if (detail !== project) {
-          detail.style.display = 'none';
-        }
+      var isOpening = project.style.display !== 'block';
+      document.querySelectorAll('.project-detail').forEach(function(detail) {
+        detail.style.display = 'none';
       });
-      project.style.display =
-        (project.style.display === 'none' || project.style.display === '')
-        ? 'block' : 'none';
-      window.scrollTo(0, document.getElementById('projects').offsetTop);
+      if (isOpening) {
+        project.style.display = 'block';
+        project.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
     function toggleMenu() {
       document.getElementById("navbar").classList.toggle("show");

@@ -19,7 +19,7 @@ parts:
   - { match: "^BUZZER~", name: "Buzzer", desc: "Sound effects" }
   - { match: "^Board", name: "Main PCB", desc: "38.1 × 53.3 mm" }
   - { match: "^Front shell$", name: "Front shell", desc: "Display window, buzzer grille, M2 heat-set inserts" }
-  - { match: "^Back shell$", name: "Back shell", desc: "Counterbored M2 screws, engraved name" }
+  - { match: "^Back shell$", name: "Back shell", desc: "Counterbored M2 screws" }
   - { match: "^D-pad cap$", name: "D-pad cap", desc: "One piece, rocks on a centre pivot pin" }
   - { match: "^Action cap$", name: "Action cap", desc: "Round, flanged" }
   - { match: "^Reset plunger$", name: "Reset plunger", desc: "Reaches the side reset switch", callout: false }
@@ -40,7 +40,7 @@ Arduino IDE with ATTinyCore, programmed through an Arduino Uno acting as an ISP.
 
 ## Case
 
-A two-part case designed in OpenSCAD around the board's 3D export, 42.9 × 58.1 × 17.1 mm. The front shell holds four M2 heat-set inserts, and M2 × 10 screws go in from the back through the board's corner holes, so nothing shows on the front. The front has a bevelled display window sized for the real 27 mm I²C OLED module, a buzzer grille and a slot with a thumb scoop for the power switch. The D-pad is a single + shaped cap that rocks on a centre pivot pin, so each arm presses only its own button and diagonals press two. There's also a round action cap and a reset plunger, and "Krish Shah" is engraved on the back. Every part prints without supports. Fit was checked against the board model with collision and clearance tests, including the path the board takes into the shell and all eight D-pad directions.
+A two-part case designed in OpenSCAD around the board's 3D export, 42.9 × 58.1 × 17.1 mm. The front shell holds four M2 heat-set inserts, and M2 × 10 screws go in from the back through the board's corner holes, so nothing shows on the front. The front has a bevelled display window sized for the real 27 mm I²C OLED module, a buzzer grille and a slot with a thumb scoop for the power switch. The D-pad is a single + shaped cap that rocks on a centre pivot pin, so each arm presses only its own button and diagonals press two. There's also a round action cap and a reset plunger. Every part prints without supports. Fit was checked against the board model with collision and clearance tests, including the path the board takes into the shell and all eight D-pad directions.
 
 ## Outcome
 

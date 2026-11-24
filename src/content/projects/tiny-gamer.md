@@ -7,7 +7,7 @@ cats: [embedded, pcb]
 summary: A coin-cell handheld console with Tetris, Space Invaders, 2048 and Sokoban squeezed into 8 KB of flash and 512 bytes of RAM, in a two-part 3D-printed case.
 stack: [ATtiny85, SSD1306 OLED, ATTinyCore, C/C++, EasyEDA Pro, OpenSCAD, 3D printing]
 model: tiny-gamer.glb
-figure: Tiny Gamer board, from the EasyEDA STEP export. CR2032 holder and ATtiny85 on the underside.
+figure: Tiny Gamer in its case. Board from the EasyEDA STEP export, case and caps from the OpenSCAD source. CR2032 holder and ATtiny85 on the underside.
 showcase: true
 parts:
   - { match: "^U1~", name: "ATtiny85", desc: "8 KB flash, 512 B SRAM, SOIC-8" }
@@ -18,6 +18,11 @@ parts:
   - { match: "^RESET~", name: "Reset button", desc: "Side-mounted" }
   - { match: "^BUZZER~", name: "Buzzer", desc: "Sound effects" }
   - { match: "^Board", name: "Main PCB", desc: "38.1 × 53.3 mm" }
+  - { match: "^Front shell$", name: "Front shell", desc: "Display window, buzzer grille, M2 heat-set inserts" }
+  - { match: "^Back shell$", name: "Back shell", desc: "Counterbored M2 screws, engraved name" }
+  - { match: "^D-pad cap$", name: "D-pad cap", desc: "One piece, rocks on a centre pivot pin" }
+  - { match: "^Action cap$", name: "Action cap", desc: "Round, flanged" }
+  - { match: "^Reset plunger$", name: "Reset plunger", desc: "Reaches the side reset switch", callout: false }
   - { match: "^(R|C)\\d+~", name: "Passives", desc: "0603 and 1206", callout: false }
 ---
 

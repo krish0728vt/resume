@@ -85,7 +85,7 @@ export async function mountShowcase(host: HTMLElement) {
       frame(cam, box, 0.75 + Math.sin(az) * 0.45, 0.6, W, H, { x: fr.left - sr.left, y: fr.top - sr.top, w: fr.width, h: fr.height }, 1.04);
       d.root.updateMatrixWorld(true);
       renderer.render(scene, cam);
-      if (!RM && t >= 1 && !switching) show(idx + 1);
+      if (t >= 1 && !switching) show(idx + 1);
     }
     requestAnimationFrame(loop);
   }

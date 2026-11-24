@@ -1,0 +1,203 @@
+---
+import fs from 'node:fs';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SheetHead from '../components/SheetHead.astro';
+import { about, spec, experience, education, skills, toolchain, certs, contact } from '../data/profile';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const num = (o: number) => `05.${String(o).padStart(2, '0')}`;
+const thumb = (id: string) => fs.existsSync(`public/thumbs/${id}.png`) ? `${base}thumbs/${id}.png` : null;
+const feat = new Set(['arc', 'led-cube']);
+const showcase = projects.filter(p => p.data.showcase && p.data.model).map(p => ({
+  model: `${base}models/${p.data.model}`,
+  title: p.data.title,
+  href: `${base}projects/${p.id}/`,
+  num: `Fig. 1.${p.data.order} — Dwg ${num(p.data.order)}`,
+  discipline: p.data.discipline
+}));
+const half = Math.ceil(skills.length / 2);
+const filters = [['all', 'All'], ['embedded', 'Embedded'], ['pcb', 'PCB'], ['robotics', 'Robotics'], ['analog', 'Analog'], ['early', 'Early builds']];
+---
+<Base title="Krish Ankur Shah — Computer Engineering" description="Krish Ankur Shah, Computer Engineering senior at Virginia Tech. Embedded systems, PCB design and robotics, drawn as an engineering drawing set.">
+
+  <section class="hero" id="top" data-sheet="01" data-title="Title">
+    <div class="showcase" data-items={JSON.stringify(showcase)}>
+      <div class="sc-stage" aria-hidden="true"></div>
+      <div class="sc-fit"></div>
+      <div class="sc-foot">
+        <a class="sc-cap out" href={showcase[0]?.href}><span class="sc-num mono"></span><span class="sc-title"></span><span class="sc-disc mono"></span></a>
+        <div class="sc-ctrl">
+          <button class="sc-prev" aria-label="Previous drawing">←</button>
+          <div class="sc-dots"></div>
+          <button class="sc-next" aria-label="Next drawing">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-text">
+      <div class="kicker mono fade" style="--d:.2s">Portfolio · Dwg No. KS-2026 · Rev B</div>
+      <h1 class="name" aria-label="Krish Ankur Shah"><span class="ln"><span style="--d:.1s">Krish Ankur</span></span><span class="ln"><span style="--d:.22s">Shah</span></span></h1>
+      <p class="lede fade" style="--d:.5s">Computer Engineering · Embedded Systems · Robotics</p>
+      <p class="sub fade" style="--d:.6s">Senior at Virginia Tech. I design boards, write the firmware and build the machines around them.</p>
+      <div class="actions fade" style="--d:.7s">
+        <a class="tlink" href="#projects">Selected work <span class="ar">↓</span></a>
+        <a class="tlink" href={`${base}resume.pdf`} target="_blank" rel="noopener">Résumé (PDF) <span class="ar">↗</span></a>
+      </div>
+    </div>
+    <a class="hero-cue mono" href="#about"><i></i>Scroll</a>
+  </section>
+
+  <section id="about" class="sheet" data-sheet="02" data-title="About">
+    <div class="wrap">
+      <SheetHead num="02" label="About" />
+      <h2 class="sheet-title rv">About <em>me</em></h2>
+      <div class="about">
+        <figure class="portrait rv">
+          <div class="img"><img src={`${base}Profile.jpg`} alt="Portrait of Krish Ankur Shah" loading="lazy" width="1372" height="1600"></div>
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <figcaption class="mono"><span>Detail A</span><span>K. A. Shah — Blacksburg, VA</span></figcaption>
+        </figure>
+        <div class="about-copy">
+          <p class="big rv" style="--d:.1s">{about.lead}</p>
+          <p class="body rv" style="--d:.15s">{about.body}</p>
+          <div class="tblock rv" style="--d:.2s">
+            {spec.map(([k, v]) => <div><small>{k}</small><span>{v}</span></div>)}
+          </div>
+          <div class="actions rv" style="--d:.3s">
+            <a class="tlink" href={`${base}resume.pdf`} target="_blank" rel="noopener">Download résumé (PDF) <span class="ar">↗</span></a>
+            <a class="tlink" href={contact.github} target="_blank" rel="noopener">GitHub <span class="ar">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="sheet" data-sheet="03" data-title="Experience">
+    <div class="wrap">
+      <SheetHead num="03" label="Work experience" />
+      <h2 class="sheet-title rv">Work <em>experience</em></h2>
+      <div class="xp">
+        {experience.map(x => (
+          <article class="xrow rv">
+            <div class="xdate">{x.dates}{x.current && <><br /><span class="cur">Current</span></>}</div>
+            <div><h3 class="xrole">{x.role}</h3><p class="xorg">{x.org}<span>{x.place}</span></p></div>
+            <ul class="bul">{x.points.map(p => <li>{p}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="sheet" data-sheet="04" data-title="Education">
+    <div class="wrap">
+      <SheetHead num="04" label="Education" />
+      <h2 class="sheet-title rv">Education</h2>
+      <div class="edu">
+        {education.map((e, i) => (
+          <div class="rv" style={`--d:${i * 0.1}s`}>
+            <div class="mono" style="color:var(--ink-2)">{e.dates}</div>
+            <h3>{e.school}<span style="display:block;font-size:.62em;color:var(--ink-2);margin-top:6px">{e.place}</span></h3>
+            <p class="deg">{e.degree}</p>
+            <ul class="bul">{e.notes.map(n => <li>{n}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="sheet" data-sheet="05" data-title="Projects">
+    <div class="wrap">
+      <SheetHead num="05" label="Projects" />
+      <h2 class="sheet-title rv">Drawing <em>register</em></h2>
+      <div class="reg-head rv">
+        <span class="mono" style="color:var(--ink-2)">{projects.length} drawings · open any sheet for the full write-up</span>
+        <div class="filters" role="group" aria-label="Filter projects">
+          {filters.map(([f, l], i) => <button class={`filter${i === 0 ? ' active' : ''}`} data-f={f} aria-pressed={i === 0 ? 'true' : 'false'}>{l}</button>)}
+        </div>
+      </div>
+      <div class="register">
+        {projects.map(p => {
+          const t = thumb(p.id);
+          return (
+            <a class={`pcard rv${feat.has(p.id) ? ' feat' : ''}`} href={`${base}projects/${p.id}/`} data-cat={p.data.cats.join(' ')}>
+              <div class="top mono"><span>{num(p.data.order)}</span>{p.data.status && <span class={`status ${p.data.status === 'Completed' ? 'done' : 'wip'}`}>{p.data.status}</span>}</div>
+              {t ? (
+                <div class="thumb"><img src={t} alt={`Line drawing of ${p.data.short}`} loading="lazy" />{p.data.cover && <img class="photo" src={`${base}${p.data.cover}`} alt="" loading="lazy" />}</div>
+              ) : p.data.cover ? (
+                <div class="thumb"><img class="cover" src={`${base}${p.data.cover}`} alt={`Photo of ${p.data.short}`} loading="lazy" /></div>
+              ) : (
+                <div class="thumb type"><b>{p.data.order}</b></div>
+              )}
+              <h3>{p.data.title}</h3>
+              <p>{p.data.summary}</p>
+              <span class="disc mono">{p.data.discipline}</span>
+              <span class="go" aria-hidden="true">↗</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="sheet" data-sheet="06" data-title="Skills">
+    <div class="wrap">
+      <SheetHead num="06" label="Skills" />
+      <h2 class="sheet-title rv">Bill of <em>materials</em></h2>
+      <div class="bom-wrap">
+        {[skills.slice(0, half), skills.slice(half)].map((col, c) => (
+          <table class="bom rv" style={`--d:${c * 0.1}s`}>
+            <thead><tr><th>Item</th><th>Description</th><th>Proficiency</th></tr></thead>
+            <tbody>
+              {col.map(([name, lv], i) => (
+                <tr><td>{String(c * half + i + 1).padStart(2, '0')}</td><td>{name}</td><td><span class="pips" role="img" aria-label={`${lv} out of 5`}>{[0, 1, 2, 3, 4].map(k => <i class={k < lv ? 'on' : ''} style={`--i:${k}`}></i>)}</span></td></tr>
+              ))}
+            </tbody>
+          </table>
+        ))}
+      </div>
+      <div class="toolchain rv">
+        <span class="mono" style="color:var(--ink-2)">Toolchain</span>
+        <p>{toolchain}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="sheet" data-sheet="07" data-title="Certifications">
+    <div class="wrap">
+      <SheetHead num="07" label="Certifications & courses" />
+      <h2 class="sheet-title rv">General <em>notes</em></h2>
+      <div class="notes rv">
+        <span class="mono" style="color:var(--ink-2)">Certifications &amp; online courses</span>
+        <ol>{certs.map(([n, by]) => <li><div>{n}<span>{by}</span></div></li>)}</ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="sheet contact" data-sheet="08" data-title="Contact">
+    <div class="wrap">
+      <SheetHead num="08" label="Contact" />
+      <h2 class="rv">Let's build <em>something.</em></h2>
+      <div class="rv" style="--d:.1s">
+        <a class="mail" href={`mailto:${contact.email}`}>{contact.email} <span class="ar">↗</span></a><button class="copy mono" id="copy" type="button" data-email={contact.email}>Copy</button>
+      </div>
+      <div class="title-block rv" style="--d:.15s">
+        <div class="big-cell"><small>Drawn by</small><span>Krish Ankur Shah</span></div>
+        <div><small>Email</small><a href={`mailto:${contact.email}`}>{contact.email}</a></div>
+        <div><small>Phone</small><a href={`tel:${contact.tel}`}>{contact.phone}</a></div>
+        <div><small>LinkedIn</small><a href={contact.linkedin} target="_blank" rel="noopener">{contact.linkedinLabel}</a></div>
+        <div><small>Rev</small><span>B</span></div>
+        <div><small>Location</small><span>{contact.location}</span></div>
+        <div><small>GitHub</small><a href={contact.github} target="_blank" rel="noopener">krish0728vt</a></div>
+        <div><small>Résumé</small><a href={`${base}resume.pdf`} target="_blank" rel="noopener">resume.pdf ↗</a></div>
+        <div><small>Sheet</small><span>08 of 08</span></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { mountShowcase } from '../scripts/showcase.ts';
+    const el = document.querySelector<HTMLElement>('.showcase');
+    if (el) mountShowcase(el);
+  </script>
+</Base>

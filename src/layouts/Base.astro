@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+const { title, description, image = 'Profile.jpg' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const home = base;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const sections = [
+  ['02', 'About', 'about'],
+  ['03', 'Experience', 'experience'],
+  ['04', 'Education', 'education'],
+  ['05', 'Projects', 'projects'],
+  ['06', 'Skills', 'skills'],
+  ['07', 'Certifications', 'certifications'],
+  ['08', 'Contact', 'contact']
+];
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="theme-color" content="#f2efe7">
+  <link rel="canonical" href={canonical}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:image" content={new URL(base + image, Astro.site)}>
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`}>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script is:inline>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="frame" aria-hidden="true"><div class="zones"></div></div>
+  <div class="sheet-no" aria-hidden="true">Sheet <span id="sheet-n">01</span> / 08 — <span id="sheet-t">Title</span></div>
+  <div class="readout" aria-hidden="true">X <span id="rx">0000.0</span> &nbsp; Y <span id="ry">0000.0</span> &nbsp; Scale 1:1</div>
+  <div class="xh v" aria-hidden="true"></div><div class="xh h" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="nav-in">
+      <a class="brand" href={home} aria-label="Krish Ankur Shah, home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5" fill="none" stroke="#15213b"/><path d="M12 1v22M1 12h22" stroke="#15213b"/></svg>
+        <b>K. A. Shah</b>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="links">
+          {sections.map(([n, label, id]) => <li><a href={`${home}#${id}`}><i>{n}</i>{label}</a></li>)}
+        </ul>
+      </nav>
+      <button class="index-btn" aria-expanded="false" aria-controls="overlay">Index</button>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <button class="index-btn close">Close</button>
+    {sections.map(([n, label, id]) => <a href={`${home}#${id}`}><i>{n}</i>{label}</a>)}
+  </div>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer>
+    <div class="wrap mono"><span>Krish Ankur Shah &copy; 2026</span><a href="#main">Back to top ↑</a></div>
+  </footer>
+  <div class="toast mono" role="status" aria-live="polite"></div>
+  <script>import '../scripts/site.ts';</script>
+</body>
+</html>

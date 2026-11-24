@@ -1,0 +1,6 @@
+---
+interface Props { num: string; label: string }
+const { num, label } = Astro.props;
+---
+<div class="ruler"></div>
+<div class="sheet-head mono"><span>{num} — {label}</span><span>Sheet {num} of 08</span></div>

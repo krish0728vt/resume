@@ -82,6 +82,16 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
       </article>
     </div>
 
+    {d.video && (
+      <>
+        <div class="ruler" style="margin-top:60px"></div>
+        <div class="sheet-head mono"><span>Film</span><span>{d.video.caption}</span></div>
+        <figure class="film rv">
+          <video src={`${base}${d.video.src}`} poster={`${base}${d.video.poster}`} muted loop playsinline autoplay preload="metadata" controls></video>
+        </figure>
+      </>
+    )}
+
     {d.gallery.length > 0 && (
       <>
         <div class="ruler" style="margin-top:60px"></div>

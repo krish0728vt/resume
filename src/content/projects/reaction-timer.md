@@ -2,6 +2,7 @@
 title: F1 Reaction Timer
 short: Reaction timer
 order: 7
+status: Completed
 discipline: Embedded · PCB · Game design
 cats: [embedded, pcb]
 summary: Formula 1 start lights on a custom PCB. Five reds light up, go dark at a random moment, and the board times your reaction to the millisecond.

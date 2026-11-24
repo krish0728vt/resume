@@ -22,6 +22,7 @@ const projects = defineCollection({
     })).default([]),
     dims: z.boolean().default(false),
     cover: z.string().optional(),
+    video: z.object({ src: z.string(), poster: z.string(), caption: z.string() }).optional(),
     gallery: z.array(z.object({ src: z.string(), caption: z.string() })).default([]),
     showcase: z.boolean().default(false)
   })

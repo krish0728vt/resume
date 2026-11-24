@@ -2,6 +2,7 @@
 title: Smart Drawer Camera Alert
 short: Smart drawer
 order: 5
+status: Completed
 discipline: PCB · IoT · Power
 cats: [pcb, embedded]
 summary: A battery-powered camera board that wakes when a drawer opens, takes a photo and sends an alert.

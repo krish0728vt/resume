@@ -25,13 +25,11 @@ const filters = [['all', 'All'], ['embedded', 'Embedded'], ['pcb', 'PCB'], ['rob
   <section class="hero" id="top" data-sheet="01" data-title="Title">
     <div class="showcase" data-items={JSON.stringify(showcase)}>
       <div class="sc-stage" aria-hidden="true"></div>
-      <div class="sc-fit"></div>
+      <a class="sc-fit" href={showcase[0]?.href}><span class="sc-open mono">Open drawing →</span></a>
       <div class="sc-foot">
         <a class="sc-cap out" href={showcase[0]?.href}><span class="sc-num mono"></span><span class="sc-title"></span><span class="sc-disc mono"></span></a>
         <div class="sc-ctrl">
-          <button class="sc-prev" aria-label="Previous drawing">←</button>
           <div class="sc-dots"></div>
-          <button class="sc-next" aria-label="Next drawing">→</button>
         </div>
       </div>
     </div>

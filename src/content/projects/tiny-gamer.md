@@ -4,8 +4,8 @@ short: Tiny Gamer
 order: 8
 discipline: Embedded · PCB
 cats: [embedded, pcb]
-summary: A coin-cell handheld console with Tetris, Space Invaders, 2048 and Sokoban squeezed into 8 KB of flash and 512 bytes of RAM.
-stack: [ATtiny85, SSD1306 OLED, ATTinyCore, C/C++, EasyEDA Pro]
+summary: A coin-cell handheld console with Tetris, Space Invaders, 2048 and Sokoban squeezed into 8 KB of flash and 512 bytes of RAM, in a two-part 3D-printed case.
+stack: [ATtiny85, SSD1306 OLED, ATTinyCore, C/C++, EasyEDA Pro, OpenSCAD, 3D printing]
 model: tiny-gamer.glb
 figure: Tiny Gamer board, from the EasyEDA STEP export. CR2032 holder and ATtiny85 on the underside.
 showcase: true
@@ -32,6 +32,10 @@ Tetris, Space Invaders, 2048 and Sokoban, each with button controls, game logic 
 ## Toolchain
 
 Arduino IDE with ATTinyCore, programmed through an Arduino Uno acting as an ISP. The board was designed in EasyEDA Pro.
+
+## Case
+
+A two-part case designed in OpenSCAD around the board's 3D export, 42.9 × 58.1 × 17.1 mm. The front shell holds four M2 heat-set inserts, and M2 × 10 screws go in from the back through the board's corner holes, so nothing shows on the front. The front has a bevelled display window sized for the real 27 mm I²C OLED module, a buzzer grille and a slot with a thumb scoop for the power switch. The D-pad is a single + shaped cap that rocks on a centre pivot pin, so each arm presses only its own button and diagonals press two. There's also a round action cap and a reset plunger, and "Krish Shah" is engraved on the back. Every part prints without supports. Fit was checked against the board model with collision and clearance tests, including the path the board takes into the shell and all eight D-pad directions.
 
 ## Outcome
 

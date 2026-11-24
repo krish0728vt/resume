@@ -10,6 +10,8 @@ stack: [M5Stack CoreS3, Raspberry Pi 5, Ollama, Faster-Whisper, Kokoro TTS, TFLi
 model: arc.glb
 figure: ARC v0.3.2 robot assembly, generated from the CadQuery source. Exploded along the build script's own offsets.
 showcase: true
+gallery:
+  - { src: images/arc/concept.jpg, caption: Concept render of the finished robot }
 parts:
   - { match: "^M5Stack CoreS3", name: "M5Stack CoreS3", desc: "Face, touchscreen, mic, speaker, camera" }
   - { match: "^M5Stack M138", name: "M5Stack M138", desc: "Dual motor driver with encoder inputs" }

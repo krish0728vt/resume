@@ -14,6 +14,7 @@ export async function mountProjectViewer(section: HTMLElement) {
   const cue = section.querySelector<HTMLElement>('.pv-cue');
   const svg = stage.querySelector<SVGSVGElement>('svg')!;
   const tags = stage.querySelector<HTMLElement>('.pv-tags')!;
+  const card = section.querySelector<HTMLElement>('.pv-insp');
   const defs: PartDef[] = JSON.parse(section.dataset.parts || '[]');
 
   let progress = 0;
@@ -44,12 +45,12 @@ export async function mountProjectViewer(section: HTMLElement) {
   const tbody = section.querySelector('.parts tbody');
   if (tbody) tbody.innerHTML = listed.map((p, i) => `<tr data-i="${i}"><td>${p.item}</td><td>${p.name}</td><td>${p.desc}</td><td>${p.qty}</td></tr>`).join('');
   const legend = section.querySelector('.pv-legend');
-  if (legend) legend.innerHTML = listed.filter(p => p.callout !== false).map(p => `<span><b>${p.item}</b>${p.name}</span>`).join(' ');
+  if (legend) legend.innerHTML = listed.filter(p => p.callout !== false).map(p => `<span data-i="${listed.indexOf(p)}"><b>${p.item}</b>${p.name}</span>`).join(' ');
 
   const NS = 'http://www.w3.org/2000/svg';
   const callouts = listed.filter(p => p.callout !== false).map(p => {
     const part = d.parts.find(q => p.re.test(q.name))!;
-    const el = document.createElement('div'); el.className = 'balloon'; el.textContent = String(p.item); el.title = `${p.name} — ${p.desc}`;
+    const el = document.createElement('button'); el.type = 'button'; el.className = 'balloon'; el.textContent = String(p.item); el.title = `Inspect ${p.name}`; el.setAttribute('aria-label', `Inspect item ${p.item}, ${p.name}`);
     tags.appendChild(el);
     const line = document.createElementNS(NS, 'path'); line.setAttribute('class', 'leader');
     const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('r', '2.2'); dot.setAttribute('class', 'leader-dot');
@@ -72,6 +73,52 @@ export async function mountProjectViewer(section: HTMLElement) {
   callouts.forEach(c => {
     c.el.addEventListener('pointerenter', () => highlight(c.i, true));
     c.el.addEventListener('pointerleave', () => highlight(c.i, false));
+    c.el.addEventListener('pointerdown', e => e.stopPropagation());
+    c.el.addEventListener('click', () => inspect(c.i));
+  });
+
+  let focusIdx = -1, fk = 0, fTarget = 0;
+  const fBox = new THREE.Box3(), pBox = new THREE.Box3(), tBox = new THREE.Box3();
+  const fill = (i: number) => {
+    if (!card) return;
+    const p = listed[i];
+    card.querySelector('.pi-item')!.textContent = `Item ${String(p.item).padStart(2, '0')} of ${String(listed.length).padStart(2, '0')}`;
+    card.querySelector('.pi-name')!.textContent = p.name;
+    card.querySelector('.pi-desc')!.textContent = p.desc;
+    card.querySelector('.pi-qty')!.textContent = `Qty ${p.qty}`;
+  };
+  const markRows = () => {
+    tbody?.querySelectorAll('tr').forEach(r => r.classList.toggle('sel', +r.getAttribute('data-i')! === focusIdx));
+    legend?.querySelectorAll('span').forEach(r => r.classList.toggle('sel', +r.getAttribute('data-i')! === focusIdx));
+  };
+  function inspect(i: number) {
+    focusIdx = (i + listed.length) % listed.length;
+    fTarget = 1;
+    d.focus(listed[focusIdx].re);
+    fill(focusIdx);
+    card?.classList.add('on');
+    section.classList.add('inspecting');
+    markRows();
+    dirty = true;
+  }
+  function closeInspect() {
+    if (focusIdx < 0) return;
+    fTarget = 0;
+    card?.classList.remove('on');
+    section.classList.remove('inspecting');
+    focusIdx = -1;
+    markRows();
+  }
+  tbody?.querySelectorAll('tr').forEach(r => r.addEventListener('click', () => inspect(+r.getAttribute('data-i')!)));
+  legend?.querySelectorAll('span').forEach(r => r.addEventListener('click', () => inspect(+r.getAttribute('data-i')!)));
+  card?.querySelector('.pi-prev')?.addEventListener('click', () => inspect(focusIdx - 1));
+  card?.querySelector('.pi-next')?.addEventListener('click', () => inspect(focusIdx + 1));
+  card?.querySelector('.pi-close')?.addEventListener('click', closeInspect);
+  addEventListener('keydown', e => {
+    if (focusIdx < 0) return;
+    if (e.key === 'Escape') closeInspect();
+    else if (e.key === 'ArrowRight') inspect(focusIdx + 1);
+    else if (e.key === 'ArrowLeft') inspect(focusIdx - 1);
   });
 
   let W = 1, H = 1, mobile = false;
@@ -80,10 +127,23 @@ export async function mountProjectViewer(section: HTMLElement) {
   resize();
 
   let dragAz = 0, dragEl = 0, dragging = false, lx = 0, ly = 0;
-  stage.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; dragging = true; lx = e.clientX; ly = e.clientY; stage.classList.add('drag'); stage.setPointerCapture(e.pointerId); });
+  let downX = 0, downY = 0;
+  stage.addEventListener('pointerdown', e => { downX = e.clientX; downY = e.clientY; if (e.pointerType !== 'mouse') return; dragging = true; lx = e.clientX; ly = e.clientY; stage.classList.add('drag'); stage.setPointerCapture(e.pointerId); });
   stage.addEventListener('pointermove', e => { if (!dragging) return; dragAz -= (e.clientX - lx) * 0.006; dragEl = clamp(dragEl + (e.clientY - ly) * 0.004, -0.5, 0.7); lx = e.clientX; ly = e.clientY; });
   const end = () => { dragging = false; stage.classList.remove('drag'); };
-  stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  stage.addEventListener('pointerup', e => {
+    end();
+    if (Math.hypot(e.clientX - downX, e.clientY - downY) > 5 || progress < 0.3) return;
+    const r = stage.getBoundingClientRect();
+    ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, cam);
+    const hit = ray.intersectObjects(d.parts.filter(p => p.mesh.visible).map(p => p.mesh), false)[0];
+    const part = hit && d.parts.find(p => p.mesh === hit.object);
+    const i = part ? listed.findIndex(l => l.re.test(part.name)) : -1;
+    if (i >= 0 && i !== focusIdx) inspect(i);
+    else if (!part && focusIdx >= 0) closeInspect();
+  }); stage.addEventListener('pointercancel', end);
 
   let visible = true;
   new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(section);
@@ -95,6 +155,11 @@ export async function mountProjectViewer(section: HTMLElement) {
   function loop(now: number) {
     if (!visible) return;
     const t = (now - t0) / 1000;
+    if (focusIdx >= 0 && progress < 0.28) closeInspect();
+    fk += (fTarget - fk) * (RM ? 1 : 0.1);
+    if (Math.abs(fTarget - fk) < 0.002) fk = fTarget;
+    if (fk === 0 && fTarget === 0) d.focus(null);
+    if (fk > 0.5 && !dragging && !RM && focusIdx >= 0) dragAz += 0.0025;
     const e = easeInOut(smooth(0.08, 0.82, progress));
     d.setExplode(e);
     const fade = 1 - smooth(0.05, 0.25, progress);
@@ -104,11 +169,23 @@ export async function mountProjectViewer(section: HTMLElement) {
     const fr = fit.getBoundingClientRect(), sr = stage.getBoundingClientRect();
     const box = d.bounds(e).union(d.bounds(0));
     if (fade > 0.01) box.expandByObject(d.dimGroup);
-    frame(cam, box, az, el, W, H, { x: fr.left - sr.left, y: fr.top - sr.top, w: fr.width, h: fr.height });
+    let zoom = 1;
+    if (fk > 0) {
+      if (focusIdx >= 0) {
+        pBox.makeEmpty();
+        d.parts.forEach(p => { if (listed[focusIdx].re.test(p.name)) { tBox.copy(p.box).translate(p.grp.position); pBox.union(tBox); } });
+        if (!fBox.isEmpty()) { fBox.min.lerp(pBox.min, 0.18); fBox.max.lerp(pBox.max, 0.18); } else fBox.copy(pBox);
+      }
+      const s0 = box.getSize(c3).length();
+      box.min.lerp(fBox.min, fk); box.max.lerp(fBox.max, fk);
+      zoom = Math.max(1, s0 / Math.max(1e-6, box.getSize(c3).length()));
+    } else fBox.makeEmpty();
+    d.setFocus(fk, zoom);
+    frame(cam, box, az, el, W, H, { x: fr.left - sr.left, y: fr.top - sr.top, w: fr.width, h: fr.height }, 1.08 + 0.2 * fk);
     d.root.updateMatrixWorld(true);
     renderer.render(scene, cam);
 
-    const show = smooth(0.3, 0.55, progress);
+    const show = smooth(0.3, 0.55, progress) * (1 - fk);
     const center = box.getCenter(new THREE.Vector3());
     const [cx, cy] = project(center);
     const R = mobile ? 46 : 80;
@@ -139,7 +216,7 @@ export async function mountProjectViewer(section: HTMLElement) {
       const p = x.at.clone().add(d.root.position);
       const [px, py] = project(p);
       x.el.style.transform = `translate(${px.toFixed(1)}px,${py.toFixed(1)}px) translate(-50%,-50%)`;
-      x.el.style.opacity = String(fade);
+      x.el.style.opacity = String(fade * (1 - fk));
     });
     dirty = false;
     requestAnimationFrame(loop);

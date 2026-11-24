@@ -39,7 +39,15 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
             <h2>{d.short} <em>exploded</em></h2>
             <table class="parts"><thead><tr><th>Item</th><th>Part</th><th>Description</th><th>Qty</th></tr></thead><tbody></tbody></table>
             <p class="pv-legend"></p>
+            <div class="pv-tip mono">Click a number or a row to inspect that part</div>
           </div>
+        </div>
+        <div class="pv-insp" role="dialog" aria-label="Part inspector">
+          <div class="pi-head mono"><span class="pi-item"></span><button type="button" class="pi-close" aria-label="Close inspector">Close ✕</button></div>
+          <div class="pi-name"></div>
+          <p class="pi-desc"></p>
+          <div class="pi-foot mono"><span class="pi-qty"></span><span class="pi-nav"><button type="button" class="pi-prev" aria-label="Previous part">← Prev</button><button type="button" class="pi-next" aria-label="Next part">Next →</button></span></div>
+          <div class="pi-hint mono">Drag to rotate · Click the part or Esc to go back</div>
         </div>
         <div class="pv-foot">
           <div class="pv-cuewrap mono fade" style="--d:.8s"><span class="pv-cue">Scroll to disassemble</span><span class="pv-meter"><i></i></span><span class="pv-pct">000%</span></div>

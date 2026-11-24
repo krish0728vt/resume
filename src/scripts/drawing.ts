@@ -11,6 +11,8 @@ export type DrawingPart = {
   name: string;
   grp: THREE.Group;
   vis: THREE.LineSegments;
+  hid: THREE.LineSegments;
+  mesh: THREE.Mesh;
   explode: THREE.Vector3;
   box: THREE.Box3;
   isRef: boolean;
@@ -27,6 +29,8 @@ export type Drawing = {
   dimMat: THREE.LineBasicMaterial;
   dims: { text: string; at: THREE.Vector3 }[];
   highlight: (re: RegExp | null) => void;
+  focus: (re: RegExp | null) => void;
+  setFocus: (k: number, dash: number) => void;
   dispose: () => void;
 };
 
@@ -78,7 +82,7 @@ export async function buildDrawing(url: string): Promise<Drawing> {
     const hid = new THREE.LineSegments(edges, hidden); hid.renderOrder = 1; hid.computeLineDistances();
     grp.add(mesh, hid, vis);
     root.add(grp);
-    return { name: (o.userData?.name as string) || o.name, grp, vis, explode: new THREE.Vector3(ex[0], ex[1], ex[2]), box: g.boundingBox!.clone(), isRef };
+    return { name: (o.userData?.name as string) || o.name, grp, vis, hid, mesh, explode: new THREE.Vector3(ex[0], ex[1], ex[2]), box: g.boundingBox!.clone(), isRef };
   });
   const ref = parts.find(p => p.isRef);
 
@@ -104,6 +108,17 @@ export async function buildDrawing(url: string): Promise<Drawing> {
     dims.push({ text: (B.max.z - B.min.z).toFixed(2), at: new THREE.Vector3(xD, y, (B.min.z + B.max.z) / 2) });
   }
 
+  const ghost = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 1 });
+  let hlRe: RegExp | null = null, fRe: RegExp | null = null, fk = 0;
+  const apply = () => {
+    parts.forEach(p => {
+      const sel = !fRe || fRe.test(p.name);
+      const hl = !!hlRe && hlRe.test(p.name);
+      p.vis.material = hl ? red : sel ? line : ghost;
+      p.mesh.visible = sel || fk < 0.2;
+      p.hid.visible = sel || fk < 0.4;
+    });
+  };
   const tmp = new THREE.Box3();
   return {
     root, parts, ref, size, dimGroup, dimMat, dims,
@@ -113,10 +128,18 @@ export async function buildDrawing(url: string): Promise<Drawing> {
       parts.forEach(p => { tmp.copy(p.box).translate(p.explode.clone().multiplyScalar(e)); b.union(tmp); });
       return b;
     },
-    highlight(re: RegExp | null) { parts.forEach(p => { p.vis.material = re && re.test(p.name) ? red : line; }); },
+    highlight(re: RegExp | null) { hlRe = re; apply(); },
+    focus(re: RegExp | null) { fRe = re; apply(); },
+    setFocus(k: number, dash: number) {
+      const was = [fk < 0.2, fk < 0.4];
+      fk = k;
+      ghost.opacity = 1 - 0.93 * k;
+      hidden.scale = dash;
+      if (was[0] !== fk < 0.2 || was[1] !== fk < 0.4) apply();
+    },
     dispose() {
       root.traverse(o => { const m = o as THREE.Mesh; if (m.geometry) m.geometry.dispose(); });
-      [fill, refFill, line, red, hidden, dimMat].forEach(m => m.dispose());
+      [fill, refFill, line, red, hidden, dimMat, ghost].forEach(m => m.dispose());
     }
   };
 }

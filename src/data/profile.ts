@@ -1,6 +1,6 @@
 export const about = {
   lead: 'I am a senior at Virginia Tech studying Computer Engineering, specialising in Controls, Robotics and Autonomy. I like building things that work in the real world: circuits, microcontrollers, CAD and software brought together into one finished device.',
-  body: 'Most of my projects start as a PCB and end as a working machine, from a wave-measuring buoy and a Wi-Fi pan-tilt camera to a tracked robot that talks back. I care about the whole stack: the schematic and layout, the power design, the firmware, the enclosure, and the software that ties it together.'
+  body: 'Most of my projects start as a PCB and end as a working machine, from a wave sensor for small boats and a Wi-Fi pan-tilt camera to a tracked robot that talks back. I care about the whole stack: the schematic and layout, the power design, the firmware, the enclosure, and the software that ties it together.'
 };
 
 export const spec = [

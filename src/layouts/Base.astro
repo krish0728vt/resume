@@ -5,11 +5,12 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  noindex?: boolean;
 }
-const { title, description, image = 'Profile.jpg' } = Astro.props;
+const { title, description, image = 'Profile.jpg', noindex = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const home = base;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/').replace(/\.html\/$/, '.html'), Astro.site);
 const sections = [
   ['02', 'About', 'about'],
   ['03', 'Experience', 'experience'],
@@ -28,7 +29,7 @@ const sections = [
   <title>{title}</title>
   <meta name="description" content={description}>
   <meta name="theme-color" content="#f2efe7">
-  <link rel="canonical" href={canonical}>
+  {noindex ? <meta name="robots" content="noindex"> : <link rel="canonical" href={canonical}>}
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">

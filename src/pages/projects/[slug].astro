@@ -17,12 +17,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const num = (o: number) => `05.${String(o).padStart(2, '0')}`;
 const statusCls = d.status === 'Completed' ? 'done' : 'wip';
 ---
-<Base title={`${d.title} — Krish Ankur Shah`} description={d.summary} image={d.cover ?? (d.model ? `thumbs/${entry.id}.png` : 'Profile.jpg')}>
+<Base title={`${d.title} — Krish Ankur Shah`} description={d.summary} image={d.model ? `og/${entry.id}.jpg` : d.cover ?? 'Profile.jpg'}>
 
   {d.model ? (
     <section class="pv" data-model={`${base}models/${d.model}`} data-parts={JSON.stringify(d.parts)} data-sheet="05" data-title={d.short}>
       <div class="pv-pin">
-        <div class="pv-stage" role="img" aria-label={`3D exploded view of ${d.title}. Drag to rotate.`}>
+        <div class="pv-stage" role="group" aria-label={`3D exploded view of ${d.title}. Drag to rotate.`}>
           <svg aria-hidden="true"></svg>
           <div class="pv-tags"></div>
         </div>
@@ -34,7 +34,7 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
             <p class="pv-sum fade" style="--d:.4s">{d.summary}</p>
             <ul class="chips fade" style="--d:.5s">{d.stack.map(s => <li>{s}</li>)}</ul>
           </div>
-          <div class="pv-plist" aria-hidden="true">
+          <div class="pv-plist">
             <div class="mono" style="color:var(--ink-2)">Fig. {num(d.order).replace(/^0/, '')} — Parts list</div>
             <h2>{d.short} <em>exploded</em></h2>
             <table class="parts"><thead><tr><th>Item</th><th>Part</th><th>Description</th><th>Qty</th></tr></thead><tbody></tbody></table>
@@ -42,7 +42,7 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
             <div class="pv-tip mono">Click a number or a row to inspect that part</div>
           </div>
         </div>
-        <div class="pv-insp" role="dialog" aria-label="Part inspector">
+        <div class="pv-insp" role="region" aria-label="Part inspector" aria-live="polite">
           <div class="pi-head mono"><span class="pi-item"></span><button type="button" class="pi-close" aria-label="Close inspector">Close ✕</button></div>
           <div class="pi-name"></div>
           <p class="pi-desc"></p>
@@ -95,7 +95,7 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
         <div class="ruler" style="margin-top:60px"></div>
         <div class="sheet-head mono"><span>Film</span><span>{d.video.caption}</span></div>
         <figure class="film rv">
-          <video src={`${base}${d.video.src}`} poster={`${base}${d.video.poster}`} muted loop playsinline autoplay preload="metadata" controls></video>
+          <video src={`${base}${d.video.src}`} poster={`${base}${d.video.poster}`} muted loop playsinline preload="none" controls data-autoplay></video>
         </figure>
       </>
     )}
@@ -112,7 +112,7 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
             </figure>
           ))}
         </div>
-        <figure class="lightbox" aria-hidden="true"><img alt="" /><figcaption class="mono"></figcaption></figure>
+        <figure class="lightbox" aria-hidden="true" role="dialog" aria-label="Photo viewer" tabindex="-1"><img alt="" /><figcaption class="mono"></figcaption></figure>
       </>
     )}
 
@@ -123,8 +123,7 @@ const statusCls = d.status === 'Completed' ? 'done' : 'wip';
   </div>
 
   <script>
-    import { mountProjectViewer } from '../../scripts/project-viewer.ts';
     const el = document.querySelector<HTMLElement>('.pv');
-    if (el) mountProjectViewer(el);
+    if (el) import('../../scripts/project-viewer.ts').then(m => m.mountProjectViewer(el));
   </script>
 </Base>

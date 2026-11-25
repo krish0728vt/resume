@@ -43,7 +43,7 @@ export async function mountProjectViewer(section: HTMLElement) {
 
   const listed = defs.map((p, i) => ({ ...p, item: i + 1, re: new RegExp(p.match), qty: d.parts.filter(q => new RegExp(p.match).test(q.name)).length })).filter(p => p.qty > 0);
   const tbody = section.querySelector('.parts tbody');
-  if (tbody) tbody.innerHTML = listed.map((p, i) => `<tr data-i="${i}"><td>${p.item}</td><td>${p.name}</td><td>${p.desc}</td><td>${p.qty}</td></tr>`).join('');
+  if (tbody) tbody.innerHTML = listed.map((p, i) => `<tr data-i="${i}" tabindex="0" aria-label="Inspect ${p.name}"><td>${p.item}</td><td>${p.name}</td><td>${p.desc}</td><td>${p.qty}</td></tr>`).join('');
   const legend = section.querySelector('.pv-legend');
   if (legend) legend.innerHTML = listed.filter(p => p.callout !== false).map(p => `<span data-i="${listed.indexOf(p)}"><b>${p.item}</b>${p.name}</span>`).join(' ');
 
@@ -59,12 +59,10 @@ export async function mountProjectViewer(section: HTMLElement) {
   });
   const dimEls = d.dims.map(x => { const el = document.createElement('div'); el.className = 'dim-label'; el.textContent = x.text; tags.appendChild(el); return { el, at: x.at }; });
 
-  let dirty = true;
   const highlight = (i: number, on: boolean) => {
     d.highlight(on ? listed[i].re : null);
     callouts.forEach(c => c.el.classList.toggle('hl', on && c.i === i));
     tbody?.querySelectorAll('tr').forEach(r => r.classList.toggle('hl', on && +r.getAttribute('data-i')! === i));
-    dirty = true;
   };
   tbody?.querySelectorAll('tr').forEach(r => {
     r.addEventListener('pointerenter', () => highlight(+r.getAttribute('data-i')!, true));
@@ -99,7 +97,6 @@ export async function mountProjectViewer(section: HTMLElement) {
     card?.classList.add('on');
     section.classList.add('inspecting');
     markRows();
-    dirty = true;
   }
   function closeInspect() {
     if (focusIdx < 0) return;
@@ -109,7 +106,10 @@ export async function mountProjectViewer(section: HTMLElement) {
     focusIdx = -1;
     markRows();
   }
-  tbody?.querySelectorAll('tr').forEach(r => r.addEventListener('click', () => inspect(+r.getAttribute('data-i')!)));
+  tbody?.querySelectorAll('tr').forEach(r => {
+    r.addEventListener('click', () => inspect(+r.getAttribute('data-i')!));
+    r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inspect(+r.getAttribute('data-i')!); } });
+  });
   legend?.querySelectorAll('span').forEach(r => r.addEventListener('click', () => inspect(+r.getAttribute('data-i')!)));
   card?.querySelector('.pi-prev')?.addEventListener('click', () => inspect(focusIdx - 1));
   card?.querySelector('.pi-next')?.addEventListener('click', () => inspect(focusIdx + 1));
@@ -122,7 +122,7 @@ export async function mountProjectViewer(section: HTMLElement) {
   });
 
   let W = 1, H = 1, mobile = false;
-  const resize = () => { W = stage.clientWidth; H = stage.clientHeight; mobile = W <= 980; renderer.setSize(W, H, false); dirty = true; };
+  const resize = () => { W = stage.clientWidth; H = stage.clientHeight; mobile = W <= 980; renderer.setSize(W, H, false); };
   new ResizeObserver(resize).observe(stage);
   resize();
 
@@ -207,6 +207,7 @@ export async function mountProjectViewer(section: HTMLElement) {
       c.el.style.transform = `translate(${c.bx.toFixed(1)}px,${c.by.toFixed(1)}px)`;
       c.el.style.opacity = String(show);
       c.el.style.pointerEvents = show > 0.5 ? 'auto' : 'none';
+      c.el.tabIndex = show > 0.5 ? 0 : -1;
       const ang = Math.atan2(c.by - c.sy, c.bx - c.sx);
       c.line.setAttribute('d', `M${c.sx.toFixed(1)} ${c.sy.toFixed(1)} L${(c.bx - Math.cos(ang) * 14).toFixed(1)} ${(c.by - Math.sin(ang) * 14).toFixed(1)}`);
       c.line.setAttribute('opacity', String(show));
@@ -218,7 +219,6 @@ export async function mountProjectViewer(section: HTMLElement) {
       x.el.style.transform = `translate(${px.toFixed(1)}px,${py.toFixed(1)}px) translate(-50%,-50%)`;
       x.el.style.opacity = String(fade * (1 - fk));
     });
-    dirty = false;
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);

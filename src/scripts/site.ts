@@ -115,8 +115,17 @@ if (lb) {
   $$<HTMLAnchorElement>('.gallery a').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
     img.src = a.href; img.alt = a.dataset.caption || ''; cap.textContent = a.dataset.caption || '';
-    lb.classList.add('open'); lenis?.stop();
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); lenis?.stop();
+    opener = a; requestAnimationFrame(() => lb.focus());
   }));
-  lb.addEventListener('click', () => { lb.classList.remove('open'); lenis?.start(); });
-  addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) { lb.classList.remove('open'); lenis?.start(); } });
+  let opener: HTMLElement | null = null;
+  const shut = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); lenis?.start(); opener?.focus(); };
+  lb.addEventListener('click', shut);
+  addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) { e.stopImmediatePropagation(); shut(); } }, true);
 }
+
+const vio = new IntersectionObserver(es => es.forEach(e => {
+  const v = e.target as HTMLVideoElement;
+  if (e.isIntersecting && !RM) v.play().catch(() => {}); else v.pause();
+}), { threshold: 0.35 });
+$$<HTMLVideoElement>('video[data-autoplay]').forEach(v => vio.observe(v));

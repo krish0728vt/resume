@@ -39,7 +39,7 @@ export async function mountShowcase(host: HTMLElement) {
     await new Promise(r => setTimeout(r, 450));
     let next: Drawing;
     try { next = await buildDrawing(it.model); }
-    catch { switching = false; return; }
+    catch { shownAt = performance.now(); canvas.style.opacity = d ? '1' : '0'; cap.classList.remove('out'); switching = false; return; }
     if (d) { scene.remove(d.root); d.dispose(); }
     d = next;
     d.dimGroup.visible = false;
